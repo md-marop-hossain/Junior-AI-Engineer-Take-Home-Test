@@ -44,9 +44,11 @@ def init_db() -> None:
 
 def seed_db() -> None:
     """Insert sample listings if the table is empty."""
+    from sqlalchemy import select, func
     from .models import Listing
     from .seed import SAMPLE_LISTINGS
 
     with get_session() as session:
-        if session.query(Listing).count() == 0:
+        count = session.scalar(select(func.count()).select_from(Listing))
+        if count == 0:
             session.add_all([Listing(**row) for row in SAMPLE_LISTINGS])

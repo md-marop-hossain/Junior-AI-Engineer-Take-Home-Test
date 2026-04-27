@@ -32,6 +32,15 @@ def _llm() -> ChatGroq:
     )
 
 
+def _valid_uuid(v: str | None) -> bool:
+    """Return True only if `v` is a parseable UUID string."""
+    try:
+        _uuid.UUID(str(v))
+        return True
+    except (ValueError, AttributeError, TypeError):
+        return False
+
+
 SYSTEM_PROMPT = (
     "You are the StayEase booking assistant for short-term rentals in Bangladesh. "
     "You can ONLY help with: searching properties, showing listing details, and "
@@ -106,15 +115,6 @@ def classify_intent(state: AgentState) -> dict:
             criteria["check_out"] = raw.check_out
         if raw.guests is not None:
             criteria["guests"] = raw.guests
-
-    # Only trust listing IDs that are valid UUIDs.
-    # If the model returns a title instead, keep the previous ID from state.
-    def _valid_uuid(v: str | None) -> bool:
-        try:
-            _uuid.UUID(str(v))
-            return True
-        except (ValueError, AttributeError, TypeError):
-            return False
 
     extracted_lid = parsed.listing_id
     final_lid = extracted_lid if _valid_uuid(extracted_lid) else state.get("listing_id")

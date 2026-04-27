@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 from langgraph.graph import END, START, StateGraph
+from langgraph.graph.state import CompiledStateGraph
 
 from .nodes import (
     call_tool,
@@ -13,7 +14,7 @@ from .nodes import (
 from .state import AgentState
 
 
-def build_graph() -> "CompiledGraph":  # type: ignore[name-defined]
+def build_graph() -> CompiledStateGraph:
     """Wire nodes and edges into the compiled StayEase graph.
 
     Flow:
