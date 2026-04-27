@@ -1,0 +1,1 @@
+"""StayEase booking agent package."""
