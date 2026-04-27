@@ -266,3 +266,15 @@ then `seed_db()` inserts 8 sample Bangladeshi listings if the `listings` table
 is empty.
 
 API docs: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
+
+---
+
+## 5. Screenshots
+
+![Search results](output/output%20one.png)
+
+![Listing details](output/output%20one_2.png)
+
+![Booking confirmation](output/output%20one_3.png)
+
+![Conversation history](output/output%20two.png)
